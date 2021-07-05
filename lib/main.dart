@@ -11,6 +11,30 @@ class AppHomePage extends StatelessWidget {
         title: Text("Algorithm Trainer"),
         centerTitle: true,
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(child: Text("Navigation Menu")),
+            ListTile(
+              title: Text("OLL"),
+            ),
+            ListTile(
+              title: Text("PLL"),
+            ),
+            ListTile(
+              title: Text("2-Look Algorithms"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new App2LookAlgorithms()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           SizedBox(height: 15.0,),
