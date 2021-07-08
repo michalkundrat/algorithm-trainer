@@ -2,14 +2,18 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+String ms_string = "000";
+
 String formatTime(int milliseconds) {
+  ms_string = milliseconds.toString().substring(1);
   var secs = milliseconds ~/ 1000;
   var hours = (secs ~/ 3600).toString().padLeft(2, '0');
   var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
   var seconds = (secs % 60).toString().padLeft(2, '0');
-  return "$minutes:$seconds.$milliseconds";
+  return "$minutes:$seconds.$ms_string";
 }
 
 class AppBasicTimer extends StatefulWidget {
@@ -82,9 +86,16 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
                       timerPressed = false;
                       readyToGo = false;
                     });
+                  } else {
+                    setState(() {
+                      timerPressed = false;
+                      readyToGo = false;
+                    });
                   }
                 },
-                child: changeColor()
+                child: Container(
+                    child: changeColor()
+                )
             ),
 
             //timerPressed ? new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.red)) : new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.black)),
