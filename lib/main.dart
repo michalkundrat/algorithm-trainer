@@ -59,7 +59,17 @@ class AppHomePage extends StatelessWidget {
                 InkWell(
                   onTap: () {},
                   child: Container(
-                    color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Column(
                       children: [
                         Image(image: AssetImage("assets/2-Look/OLL/antisune.png")),
@@ -72,7 +82,17 @@ class AppHomePage extends StatelessWidget {
                 InkWell(
                   onTap: () {},
                   child: Container(
-                    color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Column(
                       children: [
                         Image(image: AssetImage("assets/2-Look/PLL/Adjacent_Corner_Swap.png")),
@@ -97,7 +117,17 @@ class AppHomePage extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Column(
                       children: [
                         Row(
@@ -145,7 +175,17 @@ class App2LookAlgorithms extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  color: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Column(
                     children: [
                       Image(image: AssetImage("assets/2-Look/OLL/line.png")),
@@ -164,7 +204,17 @@ class App2LookAlgorithms extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  color: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Column(
                     children: [
                       Image(image: AssetImage("assets/2-Look/PLL/Z_Perm.png")),

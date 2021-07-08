@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class AppBasicTimer extends StatefulWidget {
 class _AppBasicTimerState extends State<AppBasicTimer> {
 
   bool timerPressed = false;
+  bool readyToGo = false;
   late Stopwatch _stopwatch;
 
   @override
@@ -30,7 +32,7 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
     } else {
       _stopwatch.start();
     }
-    setState(() {});    // re-render the page
+    setState(() {});
   }
   @override
   Widget build(BuildContext context) {
@@ -49,13 +51,33 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
                   });
                 }
                 },
-              onLongPressStart: (details) {setState(() {timerPressed = true;});},
-              onLongPressEnd: (details) {handleStartStop(); setState(() {timerPressed = false;});},
-              child: timerPressed ? new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.red)) : new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.black)),
+              onLongPressStart: (details) {setState(() {
+                timerPressed = true;
+                sleep(Duration(seconds:1));
+                readyToGo = true;
+              });},
+              onLongPressEnd: (details) {if (readyToGo) {handleStartStop(); setState(() {timerPressed = false; readyToGo = false;});}},
+              child: changeColor()
             ),
+
+              //timerPressed ? new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.red)) : new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.black)),
+            ElevatedButton(
+                onPressed: () {
+                  _stopwatch.reset();
+                },
+                child: Text("Reset"))
           ],
         ),
       ),
     );
+  }
+  Widget changeColor() {
+    if (timerPressed && readyToGo) {
+      return Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.green));
+    } else if (timerPressed && !readyToGo) {
+      return Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.red));
+    } else {
+      return Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.black));
+    }
   }
 }
