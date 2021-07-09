@@ -94,8 +94,8 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
                   }
                 },
                 child: Container(
-                    child: changeColor()
-                )
+                      child: changeColor()
+                  ),
             ),
 
             //timerPressed ? new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.red)) : new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.black)),
