@@ -1,14 +1,29 @@
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+late Random random = new Random();
+
 
 String ms_string = "000";
 var possibleMoves3x3 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
 var possibleMoves2x2 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
 var possibleMovesPyraminx = ["R","R'","R2","L","L'","L2","U","U'","U2","B","B'","B2","l","l'","r","r'","u","u'","b","b'"];
+
+String generateScramble3x3() {
+  var lengthOfScramble = random.nextInt(25);
+  var scrambleAsList = [];
+  for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
+    var index = random.nextInt(possibleMoves3x3.length);
+    scrambleAsList.add(possibleMoves3x3[index]);
+  }
+  String scramble = scrambleAsList.join(" ");
+  return scramble;
+}
 
 String formatTime(int milliseconds) {
   ms_string = milliseconds.toString().substring(1);
