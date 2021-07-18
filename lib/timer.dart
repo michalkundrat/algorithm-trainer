@@ -6,10 +6,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 String ms_string = "000";
+var possibleMoves3x3 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
+var possibleMoves2x2 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
+var possibleMovesPyraminx = ["R","R'","R2","L","L'","L2","U","U'","U2","B","B'","B2","l","l'","r","r'","u","u'","b","b'"];
 
 String formatTime(int milliseconds) {
   ms_string = milliseconds.toString().substring(1);
   var secs = milliseconds ~/ 1000;
+  if (secs >= 10) {
+    ms_string = ms_string.substring(1, 4);
+  }
+  if (secs >= 60) {
+    ms_string = ms_string.substring(1, 4);
+  }
   var hours = (secs ~/ 3600).toString().padLeft(2, '0');
   var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
   var seconds = (secs % 60).toString().padLeft(2, '0');
@@ -89,14 +98,13 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
             });
           }
         },
+        behavior: HitTestBehavior.translucent,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                  child: changeColor()
-              ),
+              Container(child: changeColor()),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -112,15 +120,15 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
   }
 
   Widget changeColor() {
-      if (timerPressed && readyToGo) {
-        return Text(formatTime(_stopwatch.elapsedMilliseconds),
-            style: TextStyle(fontSize: 48.0, color: Colors.green));
-      } else if (timerPressed && !readyToGo) {
-        return Text(formatTime(_stopwatch.elapsedMilliseconds),
-            style: TextStyle(fontSize: 48.0, color: Colors.red));
-      } else {
-        return Text(formatTime(_stopwatch.elapsedMilliseconds),
-            style: TextStyle(fontSize: 48.0, color: Colors.black));
-      }
+    if (timerPressed && readyToGo) {
+      return Text(formatTime(_stopwatch.elapsedMilliseconds),
+          style: TextStyle(fontSize: 48.0, color: Colors.green));
+    } else if (timerPressed && !readyToGo) {
+      return Text(formatTime(_stopwatch.elapsedMilliseconds),
+          style: TextStyle(fontSize: 48.0, color: Colors.red));
+    } else {
+      return Text(formatTime(_stopwatch.elapsedMilliseconds),
+          style: TextStyle(fontSize: 48.0, color: Colors.black));
+    }
   }
 }
