@@ -55,58 +55,57 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Algorithm Trainer: Timer")),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-                onTap: () {
-                  if (_stopwatch.isRunning) {
-                    handleStartStop();
-                    setState(() {
-                      timerPressed = false;
-                    });
-                  }
-                },
-                onLongPressStart: (details) async {
-                  setState(() {
-                    timerPressed = true;
-                  });
+      body: GestureDetector(
+        onTap: () {
+          if (_stopwatch.isRunning) {
+            handleStartStop();
+            setState(() {
+              timerPressed = false;
+            });
+          }
+        },
+        onLongPressStart: (details) async {
+          setState(() {
+            timerPressed = true;
+          });
 
-                  await Future.delayed(Duration(seconds: 1));
+          await Future.delayed(Duration(seconds: 1));
 
-                  setState(() {
-                    readyToGo = true;
-                  });
-                },
-                onLongPressEnd: (details) {
-                  if (readyToGo) {
-                    handleStartStop();
+          setState(() {
+            readyToGo = true;
+          });
+        },
+        onLongPressEnd: (details) {
+          if (readyToGo) {
+            handleStartStop();
+            setState(() {
+              timerPressed = false;
+              readyToGo = false;
+            });
+          } else {
+            setState(() {
+              timerPressed = false;
+              readyToGo = false;
+            });
+          }
+        },
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  child: changeColor()
+              ),
+              ElevatedButton(
+                  onPressed: () {
                     setState(() {
-                      timerPressed = false;
-                      readyToGo = false;
+                      _stopwatch.reset();
                     });
-                  } else {
-                    setState(() {
-                      timerPressed = false;
-                      readyToGo = false;
-                    });
-                  }
-                },
-                child: Container(
-                      child: changeColor()
-                  ),
-            ),
-
-            //timerPressed ? new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.red)) : new Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0, color: Colors.black)),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _stopwatch.reset();
-                  });
-                },
-                child: Text("Reset"))
-          ],
+                  },
+                  child: Text("Reset"))
+            ],
+          ),
         ),
       ),
     );
