@@ -11,10 +11,100 @@ late Random random = new Random();
 String lastScramble = "";
 
 String ms_string = "000";
-var possibleMoves4x4 = [possibleMoves3x3, "Fw", "Bw", "Rw", "Lw", "Dw", "Uw", "f", "b", "u", "d", "r", "l"];
-var possibleMoves3x3 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
-var possibleMoves2x2 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
-var possibleMovesPyraminx = ["R","R'","R2","L","L'","L2","U","U'","U2","B","B'","B2","l","l'","r","r'","u","u'","b","b'"];
+var possibleMoves4x4 = [
+  "R",
+  "R'",
+  "R2",
+  "L",
+  "L'",
+  "L2",
+  "U",
+  "U'",
+  "U2",
+  "D",
+  "D'",
+  "D2",
+  "F",
+  "F'",
+  "F2",
+  "B",
+  "B'",
+  "B2",
+  "Fw",
+  "Bw",
+  "Rw",
+  "Lw",
+  "Dw",
+  "Uw",
+  "f",
+  "b",
+  "u",
+  "d",
+  "r",
+  "l"
+];
+var possibleMoves3x3 = [
+  "R",
+  "R'",
+  "R2",
+  "L",
+  "L'",
+  "L2",
+  "U",
+  "U'",
+  "U2",
+  "D",
+  "D'",
+  "D2",
+  "F",
+  "F'",
+  "F2",
+  "B",
+  "B'",
+  "B2"
+];
+var possibleMoves2x2 = [
+  "R",
+  "R'",
+  "R2",
+  "L",
+  "L'",
+  "L2",
+  "U",
+  "U'",
+  "U2",
+  "D",
+  "D'",
+  "D2",
+  "F",
+  "F'",
+  "F2",
+  "B",
+  "B'",
+  "B2"
+];
+var possibleMovesPyraminx = [
+  "R",
+  "R'",
+  "R2",
+  "L",
+  "L'",
+  "L2",
+  "U",
+  "U'",
+  "U2",
+  "B",
+  "B'",
+  "B2",
+  "l",
+  "l'",
+  "r",
+  "r'",
+  "u",
+  "u'",
+  "b",
+  "b'"
+];
 var scrambleToDo = "3x3";
 bool readyToScramble = true;
 
@@ -29,10 +119,10 @@ Widget handleScrambleMaking() {
     readyToScramble = false;
     return Text(generateScramble2x2());
   } else if (scrambleToDo == "Pyraminx") {
-      readyToScramble = false;
-      return Text(generateScramblePyraminx());
+    readyToScramble = false;
+    return Text(generateScramblePyraminx());
   } else {
-      return Text("Sorry, could not generate a scramble!");
+    return Text("Sorry, could not generate a scramble!");
   }
 }
 
@@ -41,12 +131,13 @@ String generateScramble4x4() {
   var scrambleAsList = [];
   for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
     var index = random.nextInt(possibleMoves4x4.length);
-    scrambleAsList.add(possibleMoves3x3[index]);
+    scrambleAsList.add(possibleMoves4x4[index]);
   }
   String scramble = scrambleAsList.join(" ");
   lastScramble = scramble;
   return scramble;
 }
+
 String generateScramble3x3() {
   var lengthOfScramble = random.nextInt(7) + 18;
   var scrambleAsList = [];
@@ -58,23 +149,25 @@ String generateScramble3x3() {
   lastScramble = scramble;
   return scramble;
 }
+
 String generateScramble2x2() {
   var lengthOfScramble = random.nextInt(4) + 9;
   var scrambleAsList = [];
   for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
     var index = random.nextInt(possibleMoves3x3.length);
-    scrambleAsList.add(possibleMoves3x3[index]);
+    scrambleAsList.add(possibleMoves2x2[index]);
   }
   String scramble = scrambleAsList.join(" ");
   lastScramble = scramble;
   return scramble;
 }
-String generateScramblePyraminx () {
+
+String generateScramblePyraminx() {
   var lengthOfScramble = random.nextInt(4) + 9;
   var scrambleAsList = [];
   for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
     var index = random.nextInt(possibleMoves3x3.length);
-    scrambleAsList.add(possibleMoves3x3[index]);
+    scrambleAsList.add(possibleMovesPyraminx[index]);
   }
   String scramble = scrambleAsList.join(" ");
   lastScramble = scramble;
@@ -135,88 +228,93 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Algorithm Trainer: Timer")),
-      body: GestureDetector(
-        onTap: () {
-          if (_stopwatch.isRunning) {
-            handleStartStop();
-            setState(() {
-              timerPressed = false;
-            });
-          }
-        },
-        onLongPressStart: (details) async {
-          setState(() {
-            timerPressed = true;
-          });
+        appBar: AppBar(title: Text("Algorithm Trainer: Timer")),
+        body: GestureDetector(
+            onTap: () {
+              if (_stopwatch.isRunning) {
+                handleStartStop();
+                setState(() {
+                  timerPressed = false;
+                });
+              }
+            },
+            onLongPressStart: (details) async {
+              setState(() {
+                timerPressed = true;
+              });
 
-          await Future.delayed(Duration(milliseconds: 800));
+              await Future.delayed(Duration(milliseconds: 800));
 
-          setState(() {
-            readyToGo = true;
-          });
-        },
-        onLongPressEnd: (details) {
-          if (readyToGo) {
-            handleStartStop();
-            setState(() {
-              timerPressed = false;
-              readyToGo = false;
-            });
-          } else {
-            setState(() {
-              timerPressed = false;
-              readyToGo = false;
-            });
-          }
-        },
-        behavior: HitTestBehavior.translucent,
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                child: Column(
+              setState(() {
+                readyToGo = true;
+              });
+            },
+            onLongPressEnd: (details) {
+              if (readyToGo) {
+                handleStartStop();
+                setState(() {
+                  timerPressed = false;
+                  readyToGo = false;
+                });
+              } else {
+                setState(() {
+                  timerPressed = false;
+                  readyToGo = false;
+                });
+              }
+            },
+            behavior: HitTestBehavior.translucent,
+            child: Center(
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    DropdownButton(
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          scrambleToDo = newValue!;
-                          handleScrambleMaking();
-                        });
-                      },
-                      value: scrambleToDo,
-                      items: <String>['2x2', '3x3', '4x4', 'Pyraminx'].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                    readyToScramble ? handleScrambleMaking() : Text(
-                      lastScramble,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 22.5,
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          DropdownButton(
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                scrambleToDo = newValue!;
+                                handleScrambleMaking();
+                              });
+                            },
+                            value: scrambleToDo,
+                            items: <String>['2x2', '3x3', '4x4', 'Pyraminx']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                          readyToScramble
+                              ? handleScrambleMaking()
+                              : Text(
+                                  lastScramble,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 22.5,
+                                  ),
+                                )
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                    SizedBox(
+                      height: 155.0,
+                    ),
+                    Container(child: changeColor()),
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _stopwatch.reset();
+                          });
+                        },
+                        child: Text("Reset")),
+                  ]
               ),
-              SizedBox(height: 155.0,),
-              Container(child: changeColor()),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _stopwatch.reset();
-                    });
-                  },
-                  child: Text("Reset"))
-            ],
-          ),
-        ),
-      ),
+            )
+        )
     );
   }
 
