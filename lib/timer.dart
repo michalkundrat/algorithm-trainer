@@ -14,16 +14,20 @@ var possibleMoves3x3 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2",
 var possibleMoves2x2 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
 var possibleMovesPyraminx = ["R","R'","R2","L","L'","L2","U","U'","U2","B","B'","B2","l","l'","r","r'","u","u'","b","b'"];
 var scrambleToDo = "3x3";
+bool readyToScramble = true;
 
 Widget handleScrambleMaking() {
   if (scrambleToDo == "3x3") {
+    readyToScramble = false;
     return Text(generateScramble3x3());
   } else if (scrambleToDo == "2x2") {
+    readyToScramble = false;
     return Text(generateScramble2x2());
   } else if (scrambleToDo == "Pyraminx") {
-    return Text(generateScramblePyraminx());
+      readyToScramble = false;
+      return Text(generateScramblePyraminx());
   } else {
-    return Text("Failed to generate a scramble.");
+      return Text(" ");
   }
 }
 
@@ -102,6 +106,7 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
   void handleStartStop() {
     if (_stopwatch.isRunning) {
       _stopwatch.stop();
+      readyToScramble = true;
     } else {
       _stopwatch.start();
     }
@@ -169,7 +174,7 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
                         );
                       }).toList(),
                     ),
-                    handleScrambleMaking()
+                    readyToScramble ? handleScrambleMaking() : Text(" ")
                   ],
                 ),
               ),

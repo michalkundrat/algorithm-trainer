@@ -60,6 +60,10 @@ class AppHomePage extends StatelessWidget {
                   onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.grey.withOpacity(0.5)
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: Colors.blue,
                       boxShadow: [
                         BoxShadow(
@@ -83,6 +87,10 @@ class AppHomePage extends StatelessWidget {
                   onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.grey.withOpacity(0.5)
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: Colors.blue,
                       boxShadow: [
                         BoxShadow(
@@ -118,6 +126,10 @@ class AppHomePage extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.grey.withOpacity(0.5)
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: Colors.blue,
                       boxShadow: [
                         BoxShadow(
@@ -176,6 +188,10 @@ class App2LookAlgorithms extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.grey.withOpacity(0.5)
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Colors.blue,
                     boxShadow: [
                       BoxShadow(
@@ -205,6 +221,10 @@ class App2LookAlgorithms extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.grey.withOpacity(0.5)
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Colors.blue,
                     boxShadow: [
                       BoxShadow(
