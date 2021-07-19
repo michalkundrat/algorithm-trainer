@@ -13,9 +13,42 @@ String ms_string = "000";
 var possibleMoves3x3 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
 var possibleMoves2x2 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
 var possibleMovesPyraminx = ["R","R'","R2","L","L'","L2","U","U'","U2","B","B'","B2","l","l'","r","r'","u","u'","b","b'"];
+var scrambleToDo = "3x3";
+
+Widget handleScrambleMaking() {
+  if (scrambleToDo == "3x3") {
+    return Text(generateScramble3x3());
+  } else if (scrambleToDo == "2x2") {
+    return Text(generateScramble2x2());
+  } else if (scrambleToDo == "Pyraminx") {
+    return Text(generateScramblePyraminx());
+  } else {
+    return Text("Failed to generate a scramble.");
+  }
+}
 
 String generateScramble3x3() {
-  var lengthOfScramble = random.nextInt(25);
+  var lengthOfScramble = random.nextInt(7) + 18;
+  var scrambleAsList = [];
+  for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
+    var index = random.nextInt(possibleMoves3x3.length);
+    scrambleAsList.add(possibleMoves3x3[index]);
+  }
+  String scramble = scrambleAsList.join(" ");
+  return scramble;
+}
+String generateScramble2x2() {
+  var lengthOfScramble = random.nextInt(4) + 9;
+  var scrambleAsList = [];
+  for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
+    var index = random.nextInt(possibleMoves3x3.length);
+    scrambleAsList.add(possibleMoves3x3[index]);
+  }
+  String scramble = scrambleAsList.join(" ");
+  return scramble;
+}
+String generateScramblePyraminx () {
+  var lengthOfScramble = random.nextInt(4) + 9;
   var scrambleAsList = [];
   for (int iteration = 0; iteration <= lengthOfScramble; iteration++) {
     var index = random.nextInt(possibleMoves3x3.length);
@@ -93,7 +126,7 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
             timerPressed = true;
           });
 
-          await Future.delayed(Duration(seconds: 1));
+          await Future.delayed(Duration(milliseconds: 800));
 
           setState(() {
             readyToGo = true;
@@ -116,9 +149,31 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
         behavior: HitTestBehavior.translucent,
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    DropdownButton(
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          scrambleToDo = newValue!;
+                        });
+                      },
+                      value: scrambleToDo,
+                      items: <String>['2x2', '3x3', 'Pyraminx'].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                    handleScrambleMaking()
+                  ],
+                ),
+              ),
+              SizedBox(height: 155.0,),
               Container(child: changeColor()),
               ElevatedButton(
                   onPressed: () {
