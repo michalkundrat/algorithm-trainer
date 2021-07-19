@@ -70,6 +70,8 @@ flutter:
     - assets/2-Look/PLL/Ub_Perm.png
     - assets/2-Look/PLL/Z_Perm.png
     - assets/MainApp/3x3_with_top_layer_turned.png
+    - assets/PLL/J_Perm.png
+    - assets/MainApp/timer_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

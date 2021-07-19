@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 late Random random = new Random();
 
+String lastScramble = "";
 
 String ms_string = "000";
 var possibleMoves3x3 = ["R","R'","R2","L","L'","L2","U","U'","U2","D","D'","D2","F","F'","F2","B","B'","B2"];
@@ -27,7 +28,7 @@ Widget handleScrambleMaking() {
       readyToScramble = false;
       return Text(generateScramblePyraminx());
   } else {
-      return Text(" ");
+      return Text("Sorry, could not generate a scramble!");
   }
 }
 
@@ -39,6 +40,7 @@ String generateScramble3x3() {
     scrambleAsList.add(possibleMoves3x3[index]);
   }
   String scramble = scrambleAsList.join(" ");
+  lastScramble = scramble;
   return scramble;
 }
 String generateScramble2x2() {
@@ -49,6 +51,7 @@ String generateScramble2x2() {
     scrambleAsList.add(possibleMoves3x3[index]);
   }
   String scramble = scrambleAsList.join(" ");
+  lastScramble = scramble;
   return scramble;
 }
 String generateScramblePyraminx () {
@@ -59,6 +62,7 @@ String generateScramblePyraminx () {
     scrambleAsList.add(possibleMoves3x3[index]);
   }
   String scramble = scrambleAsList.join(" ");
+  lastScramble = scramble;
   return scramble;
 }
 
@@ -164,6 +168,7 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
                       onChanged: (String? newValue) {
                         setState(() {
                           scrambleToDo = newValue!;
+                          handleScrambleMaking();
                         });
                       },
                       value: scrambleToDo,
@@ -174,7 +179,13 @@ class _AppBasicTimerState extends State<AppBasicTimer> {
                         );
                       }).toList(),
                     ),
-                    readyToScramble ? handleScrambleMaking() : Text(" ")
+                    readyToScramble ? handleScrambleMaking() : Text(
+                      lastScramble,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 22.5,
+                      ),
+                    )
                   ],
                 ),
               ),

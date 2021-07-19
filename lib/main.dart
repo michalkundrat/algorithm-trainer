@@ -156,7 +156,50 @@ class AppHomePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 25.0,)
+            SizedBox(height: 25.0,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new AppBasicTimer()),
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Colors.grey.withOpacity(0.5)
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Colors.blue,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Image(image: AssetImage("assets/MainApp/timer_icon.png")),
+                            Image(image: AssetImage("assets/PLL/J_Perm.png")),
+                          ],
+                        ),
+                        Text("Timer"),
+                        SizedBox(height: 7.0,),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
