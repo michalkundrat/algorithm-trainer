@@ -12,6 +12,6 @@ Trains you on Rubik's Cube algorithms
   <img src="https://github.com/michalkundrat/algorithm-trainer/blob/main/screenshots/Screenshot_20240322-215712.png" width="400" /> 
 </p>
 <p align="middle">
-  <img style="margin-right: 50px;" src="https://github.com/michalkundrat/algorithm-trainer/blob/main/screenshots/Screenshot_20240322-215721.png" width="400" />
+  <img src="https://github.com/michalkundrat/algorithm-trainer/blob/main/screenshots/Screenshot_20240322-215721.png" width="400" />
   <img src="https://github.com/michalkundrat/algorithm-trainer/blob/main/screenshots/Screenshot_20240322-215726.png" width="400" /> 
 </p>
