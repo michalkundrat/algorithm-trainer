@@ -1,6 +1,6 @@
 # algorithm_trainer
 
-Trains you on Rubik's Cube algorithms
+A Flutter application which allows the user to practice and learn Rubik's cube algorithms for the CFOP and CFOP 2-Look methods of solving
 
 ## Screenshots
 <p align="middle">
